@@ -1,6 +1,6 @@
 # format-usd [![Build Status](https://secure.travis-ci.org/cfpb/format-usd.png?branch=master)](http://travis-ci.org/cfpb/format-usd)
 
-> Convert a number or string to a USD-formatted string
+> Convert a number or string to a United States dollar-formatted string
 
 ## Installation
 
