@@ -14,9 +14,6 @@
     "url": "https://github.com/cfpb/format-usd"
   },
   "license": "Public Domain",
-  "files": [
-    "lib"
-  ],
   "keywords": [
     "format-usd",
     "currency",
@@ -24,11 +21,9 @@
     "convert"
   ],
   "devDependencies": {
-    "nodeunit": "~0.8.6",
-    "browserify": "^4.1.3"
+    "nodeunit": "~0.8.6"
   },
   "scripts": {
-    "test": "nodeunit test/format-usd-tests.js",
-    "browser": "browserify lib/format-usd.js > dist/format-usd.js"
+    "test": "nodeunit test/format-usd-tests.js"
   }
 }
