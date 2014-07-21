@@ -20,7 +20,7 @@ var formatUSD = require('../index.js');
     test.ifError(value)
 */
 
-exports.formatUsd = {
+exports.formatUSD = {
   setUp: function(done) {
     // setup here
     done();
