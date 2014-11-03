@@ -8,6 +8,7 @@
 var formatMoney = function( num, opts ) {
 
   opts = opts || {};
+  if (typeof num === 'string') num =  Number(num.replace(/[^0-9\.]+/g,""));
 
   var decPlaces = isNaN( opts.decimalPlaces = Math.abs(opts.decimalPlaces) ) ? 2 : opts.decimalPlaces,
       sign = num < 0 ? '-' : '',
