@@ -69,4 +69,10 @@ exports.formatUSD = {
     test.equal( formatUSD(000423, {decimalPlaces: 3}), '$275.000' );
     test.done();
   },
+  'Format strings by removing non-numeric characters': function(test) {
+    test.expect(6);
+    test.equal( formatUSD("foo99", {decimalPlaces: 0}), '$99' );
+    test.equal( formatUSD("--??!!1,2,3,4,5,6,7", {decimalPlaces: 0}), '$1,234,567' );
+    test.equal( formatUSD("zero", {decimalPlaces: 0}), '$0' );
+  }
 };
