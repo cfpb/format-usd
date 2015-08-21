@@ -72,8 +72,15 @@ exports.formatUSD = {
   'Format strings by removing non-numeric characters': function(test) {
     test.expect(3);
     test.equal( formatUSD("foo99", {decimalPlaces: 0}), '$99' );
-    test.equal( formatUSD("--??!!1,2,3,4,5,6,7", {decimalPlaces: 0}), '$1,234,567' );
+    test.equal( formatUSD("--??!!1,2,3,4,5,6,7", {decimalPlaces: 0}), '-$1,234,567' );
     test.equal( formatUSD("zero", {decimalPlaces: 0}), '$0' );
+    test.done();
+  },
+  'Preserve negative numbers as negative dollars': function(test) {
+    test.expect(3);
+    test.equal( formatUSD(-99, {decimalPlaces: 0}), '-$99' );
+    test.equal( formatUSD(-1234, {decimalPlaces: 0}), '-$1,234' );
+    test.equal( formatUSD(-5.55, {decimalPlaces: 2}), '-$5.55' );
     test.done();
   }
 };
