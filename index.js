@@ -6,6 +6,8 @@
  * @returns {string}      The number in USD format.
  */
 
+'use strict';
+
 function formatMoney( num, opts ) {
   var decPlaces = 0, // decPlaces, taken from opts
       sign = '', // sign, either '' or '-'
@@ -13,9 +15,7 @@ function formatMoney( num, opts ) {
       wholePart = 0, // whole number part of num
       formattedString = ''; // final formatted String to be returned
 
-  if ( typeof opts === 'undefined' ) {
-    opts = {};
-  }
+  opts = opts || {};
 
   // Handle a String as input
   if ( typeof num === 'string' ) {
@@ -34,11 +34,9 @@ function formatMoney( num, opts ) {
   }
 
   // Determine decimal places
-  opts.decimalPlaces = Math.abs( opts.decimalPlaces );
-  if ( isNaN( opts.decimalPlaces ) ) {
+  decPlaces = Math.abs( opts.decimalPlaces );
+  if ( isNaN( decPlaces ) ) {
     decPlaces = 2;
-  } else {
-    decPlaces = opts.decimalPlaces;
   }
 
   // Get the offset of comma separation
