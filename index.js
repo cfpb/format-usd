@@ -9,29 +9,25 @@
 'use strict';
 
 function formatMoney( num, opts ) {
-  var decPlaces = 0, // decPlaces, taken from opts
-      sign = '', // sign, either '' or '-'
-      numericValue = Math.abs( num ), // Absolute numeric value of num
-      wholePart = 0, // whole number part of num
-      formattedString = ''; // final formatted String to be returned
-
-  opts = opts || {};
+  var decPlaces = 0,
+      sign = '',
+      numericValue = num,
+      stringValue = '',
+      formattedString = '',
+      handleStringInput = require('./lib/handle-string-input.js'),
+      commaSeparate = require('./lib/comma-separate-number.js');
 
   // Handle a String as input
   if ( typeof num === 'string' ) {
-    // If a '-' appears before the first digit, we assume num is negative
-    var minusPos = num.indexOf( num.match( '-' ) ),
-        digitPos = num.indexOf( num.match( /\d/ ) );
-    if ( num.indexOf( num.match( '-' ) ) !== -1 && minusPos < digitPos ) {
-      sign = '-';
-    }
+    numericValue = handleStringInput( num );
+  }
 
-    // Strip numeric values, then convert to a number (while maintaining sign)
-    numericValue = Number( num.replace( /[^0-9\.]+/g, '' ) );
-  } else if ( num < 0 ) {
-  // If num is a negative number, assign sign
+  // Determine sign
+  if ( numericValue < 0 ) {
     sign = '-';
   }
+
+  opts = opts || {};
 
   // Determine decimal places
   decPlaces = Math.abs( opts.decimalPlaces );
@@ -39,22 +35,16 @@ function formatMoney( num, opts ) {
     decPlaces = 2;
   }
 
-  // Get the offset of comma separation
-  wholePart = Math.floor( Number( numericValue ) );
+  // Get absolute value, apply decimal places limit, return string
+  stringValue = Math.abs( numericValue ).toFixed( decPlaces );
+
+  // Get a comma-separated string of the absolute value of numericValue
+  stringValue = commaSeparate( stringValue );
 
   // Construct the formattedString
-  formattedString = sign + '$';
-
-  // add commas to numericValue
-  formattedString += wholePart.toString().replace( /(\d)(?=(\d{3})+(?!\d))/g, '$1,' );
-
-  // add decimal places
-  if ( decPlaces !== 0 ) {
-    formattedString += '.' + Math.abs( numericValue - wholePart ).toFixed( decPlaces ).slice( 2 );
-  }
+  formattedString = sign + '$' + stringValue;
 
   return formattedString;
-
 }
 
 module.exports = formatMoney;
