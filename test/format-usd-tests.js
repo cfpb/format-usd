@@ -118,7 +118,7 @@ exports.commaSeparate = {
     // setup here
     done();
   },
-  'Comma separte a numeric string': function(test) {
+  'Comma separate a numeric string': function(test) {
     test.expect(4);
     // tests here
     test.equal( commaSeparate( '1234567' ), '1,234,567' );
