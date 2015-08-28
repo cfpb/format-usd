@@ -1,26 +1,50 @@
 /**
  * @param  {string|number} num  A number or a string in a numbery format
- * @param  {object} opts Optionally specify the number of decimal places 
+ * @param  {object} opts Optionally specify the number of decimal places
  *   you'd like in the returned string with the `decimalPlaces` key.
  *   e.g. {decimalPlaces: 0}
- * @return {string}      The number in USD format.
+ * @returns {string}      The number in USD format.
  */
-var formatMoney = function( num, opts ) {
+
+'use strict';
+
+function formatMoney( num, opts ) {
+  var decPlaces = 0,
+      sign = '',
+      numericValue = num,
+      stringValue = '',
+      formattedString = '',
+      handleStringInput = require('./lib/handle-string-input.js'),
+      commaSeparate = require('./lib/comma-separate-number.js');
+
+  // Handle a String as input
+  if ( typeof num === 'string' ) {
+    numericValue = handleStringInput( num );
+  }
+
+  // Determine sign
+  if ( numericValue < 0 ) {
+    sign = '-';
+  }
 
   opts = opts || {};
-  if (typeof num === 'string') num =  Number(num.replace(/[^0-9\.]+/g,""));
 
-  var decPlaces = isNaN( opts.decimalPlaces = Math.abs(opts.decimalPlaces) ) ? 2 : opts.decimalPlaces,
-      sign = num < 0 ? '-' : '',
-      i = parseInt( num = Math.abs(+num || 0).toFixed(decPlaces), 10 ) + '',
-      j = ( j = i.length ) > 3 ? j % 3 : 0;
+  // Determine decimal places
+  decPlaces = Math.abs( opts.decimalPlaces );
+  if ( isNaN( decPlaces ) ) {
+    decPlaces = 2;
+  }
 
-  return sign + 
-        '$' + 
-        ( j ? i.substr(0, j) + ',' : '' ) + 
-        i.substr( j ).replace( /(\d{3})(?=\d)/g, '$1,' ) + 
-        ( decPlaces ? '.' + Math.abs(num - i).toFixed(decPlaces).slice(2) : '');
+  // Get absolute value, apply decimal places limit, return string
+  stringValue = Math.abs( numericValue ).toFixed( decPlaces );
 
-};
+  // Get a comma-separated string of the absolute value of numericValue
+  stringValue = commaSeparate( stringValue );
+
+  // Construct the formattedString
+  formattedString = sign + '$' + stringValue;
+
+  return formattedString;
+}
 
 module.exports = formatMoney;
