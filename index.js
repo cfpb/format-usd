@@ -8,7 +8,7 @@
 
 'use strict';
 
-function formatMoney( num, opts ) {
+function formatMoney( opts ) {
   var decPlaces = 0,
       sign = '',
       numericValue = num,
