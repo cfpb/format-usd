@@ -1,15 +1,16 @@
 /**
- * @param  {string|number} num  A number or a string in a numbery format
- * @param  {object} opts Optionally specify the number of decimal places
- *   you'd like in the returned string with the `decimalPlaces` key.
- *   e.g. {decimalPlaces: 0}
+ * @param {object} opts The options object
+ * @param {number|string} opts.number The number or string to be formatted
+ * @param {number} decimalPlaces Optionally specify the number of decimal places
+ *   you'd like in the returned string
  * @returns {string}      The number in USD format.
  */
 
 'use strict';
 
 function formatMoney( opts ) {
-  var decPlaces = 0,
+  var num = opts.number
+      decPlaces = 0,
       sign = '',
       numericValue = num,
       stringValue = '',
