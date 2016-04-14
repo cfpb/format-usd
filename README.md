@@ -14,12 +14,12 @@ npm install format-usd --save
 
 ```javascript
 var formatUSD = require('format-usd');
-formatUSD( 9000 ); // '$9000.00'
-formatUSD( '$9000' ); // '$9000.00'
-formatUSD( 9000.32 ); // '$9000.32'
-formatUSD( 1.25889349857 ); // '$1.26'
-formatUSD( 1.25889349857, {decimalPlaces: 0} ); // '$1'
-formatUSD( 1.25889349857, {decimalPlaces: 3} ); // '$1.259'
+formatUSD( { number: 9000 } ); // '$9000.00'
+formatUSD( { number: '$9000' } ); // '$9000.00'
+formatUSD( { number: 9000.32 } ); // '$9000.32'
+formatUSD( { number: 1.25889349857 } ); // '$1.26'
+formatUSD( { number: 1.25889349857, decimalPlaces: 0 } ); // '$1'
+formatUSD( { number: 1.25889349857, decimalPlaces: 3 } ); // '$1.259'
 ```
 
 ## Contributing

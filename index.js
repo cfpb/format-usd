@@ -1,6 +1,6 @@
 /**
  * @param {object} opts The options object
- * @param {number|string} opts.number The number or string to be formatted
+ * @param {number|string} opts.amount The number or string to be formatted
  * @param {number} decimalPlaces Optionally specify the number of decimal places
  *   you'd like in the returned string
  * @returns {string}      The number in USD format.
@@ -9,7 +9,7 @@
 'use strict';
 
 function formatMoney( opts ) {
-  var num = opts.number
+  var num = opts.amount,
       decPlaces = 0,
       sign = '',
       numericValue = num,
