@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://github.com/cfpb/format-usd"
   },
-  "license": "Public Domain",
+  "license": "CC0-1.0",
   "keywords": [
     "format-usd",
     "currency",
@@ -21,9 +21,12 @@
     "convert"
   ],
   "devDependencies": {
-    "nodeunit": "~0.8.6"
+    "jest-cli": "~29.3.1",
+    "prettier": "^2.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/format-usd-tests.js"
-  }
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
+    "lint": "yarn prettier './**/*.{js,jsx,ts,tsx,md}' --write"
+  },
+  "type": "module"
 }
